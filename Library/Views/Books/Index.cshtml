@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Library.Models.BookModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Аll Books</h2>
+
+<p>
+    @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+</p>
+
+@foreach (var item in Model) {
+<div class="bookbox">
+    @item.Name
+    <br/>
+    <a href="/Books/Details/@item.id">
+    <img src="@item.PhotoUrl" height="200" width="140" /></a>
+    <br />
+    @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = item.id })
+        <span>|</span>
+        @Html.ActionLink("Delete", "Delete", new { id = item.id }) 
+    }
+</div>
+}
+<style>
+    .bookbox{
+        display:inline-block;
+        height:300px;
+        width:150px;
+        margin-right:10px;
+    }
+</style>

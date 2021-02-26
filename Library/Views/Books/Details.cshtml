@@ -1,0 +1,63 @@
+﻿@model Library.Models.BookModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <h4>@Model.Name</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dd>
+            <img src="@Model.PhotoUrl" height="300" width="210"/>
+            <br />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.About)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.About)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price) $
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Published)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Published)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+    {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) <span>|</span>
+    }
+    @Html.ActionLink("Back to List", "Index")
+</p>

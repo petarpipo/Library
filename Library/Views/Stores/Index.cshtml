@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Library.Models.StoreModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Stores</h2>
+
+<p>
+    @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+</p>
+<table id="tab" class="table">
+    <thead>
+        <tr>
+            <th>
+                Logo
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="Stores/Details/@item.id"><img src="@item.PhotoUrl" height="150" width="150" /></a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id })
+                        <span> | </span>
+                        @Html.ActionLink("Books", "Details", new { id = item.id })
+                        <span> | </span>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                        <span> | </span>
+                        @Html.ActionLink("AddBook", "AddBook", new { id = item.id })
+                        <span> | </span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+<script>
+    $("#tab").DataTable();
+</script>
+    }

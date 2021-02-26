@@ -1,0 +1,15 @@
+﻿@model Library.Models.AddToGenreModel
+@{
+    ViewBag.Title = "AddToGenre";
+}
+
+<h2>AddToGenre</h2>
+
+@using (Html.BeginForm("AddToGenre","Genres"))
+{
+    <div class="form-group">
+        @Html.DropDownListFor(m=>m.BookId,new SelectList(Model.Books,"id","Name"),new {@class="form-control"})
+    </div>
+    @Html.HiddenFor(m=>m.GenreId)
+    <button type="submit" class="btn btn-default">Save</button>
+}

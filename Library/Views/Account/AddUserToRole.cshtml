@@ -1,0 +1,16 @@
+﻿@model Library.Models.AddToRoleModel
+@{
+    ViewBag.Title = "AddUserToRole";
+}
+
+<h2>Add User To Role</h2>
+
+@using (Html.BeginForm("AddUserToRole", "Account"))
+{
+<div class="form-group">
+    @Html.LabelFor(m => m.email)
+    @Html.TextBoxFor(m => m.email, new { @class = "form-control" })
+    @Html.DropDownListFor(m => m.selectRole, new SelectList(Model.roles),new {@class="form-control"})
+</div>
+<button type="submit">Add To Role</button>
+}
